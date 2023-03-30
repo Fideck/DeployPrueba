@@ -1,0 +1,63 @@
+<br />
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-5">
+          <div class="wrap">
+            <br />
+            <div
+              class="img"
+              style="
+                background-image: url(../../../../../assets/images/cybercorp.png);
+                width: 300px;
+                height: 200px;
+                transform: translate(+23%, +8%);
+              "
+            ></div>
+            <div class="login-wrap p-4 p-md-5">
+              <div class="d-flex">
+                <div class="w-100">
+                  <h2 class="mb-4" style="text-align: center">
+                    <span>INICIAR SESION</span>
+                  </h2>
+                </div>
+              </div>
+              <form [formGroup]="form" (ngSubmit)="login()" control="" class="signin-form">
+                <div class="form-group mt-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    required
+                    formControlName="username"
+                  />
+                  <label class="form-control-placeholder" for="username"
+                    >Usuario</label
+                  >
+                </div>
+                <div class="form-group">
+                  <input
+                    type="password"
+                    class="form-control"
+                    required
+                    formControlName="password"
+                  />
+                  <label class="form-control-placeholder" for="password"
+                    >Password</label
+                  >
+                </div>
+                <div class="form-group" style="text-align: center">
+                  <input
+                    type="submit"
+                    class="btn form-control btn btn-primary rounded submit px-3"
+                    value="Ingresar"
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

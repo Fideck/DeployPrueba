@@ -1,0 +1,21 @@
+<div class="modal-header">
+  <h5 class="modal-title">DETALLE DEL PRODUCTO</h5>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="modalRef.close()"
+  ></button>
+</div>
+<div class="modal-body">
+    <p>Descripcion: {{ producto.description }}</p>
+    <p>Industria: {{ producto.industry }}</p>
+    <p>Stock: {{ producto.stock }}</p>
+    <p>Marca: {{ producto.marca }}</p>
+    <p>Garantia: {{ producto.assurance_months }}</p>
+    <p>Precio compra: {{ producto.purchase_price }}</p>
+    <p>Precio venta: {{ producto.selling_price }}</p>
+    <p>Proveedor: {{ producto.supplier }}</p>
+    <p>Sede: {{ producto.branchOffice }}</p>
+    <p><img [src]="producto.image" height="150px" width="150px" alt=""></p>
+</div>

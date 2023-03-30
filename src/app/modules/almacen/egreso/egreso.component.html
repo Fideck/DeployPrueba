@@ -1,0 +1,94 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<br />
+<div class="content-wrapper">
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <div class="crear">
+                <input
+                  type="button"
+                  class="btn btn-primary"
+                  value="Agregar"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modelId"
+                />
+              </div>
+            </div>
+            <form [formGroup]="form" (ngSubmit)="registrarDetalle()">
+              <div class="card-body">
+                <table id="" class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th>Opciones</th>
+                      <th>Producto</th>
+                      <th>Stock</th>
+                      <th>Unidades</th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    formArrayName="detalleEgreso"
+                    *ngFor="let detalle of getForm().controls; let i = index"
+                  >
+                    <tr [formGroupName]="i">
+                      <td>
+                        <button
+                          class="btn btn-danger"
+                          (click)="eliminarDetalleProducto(i)"
+                        >
+                          <i class="fa fa-trash"> </i>
+                        </button>
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          formControlName="producto"
+                          class="form-control"
+                          readonly
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="number"
+                          class="form-control"
+                          formControlName="stock"
+                          readonly
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="number"
+                          formControlName="cantidad"
+                          class="form-control"
+                        />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-sm-2">
+                <div class="d-grid gap-1">
+                  <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button> -->
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    [disabled]="this.form.invalid || getForm().length == 0"
+                  >
+                    Registrar
+                  </button>
+                  <a [routerLink]="['/home/dashboard/']" class="btn btn-secondary"
+                    >Cancelar</a
+                  >
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /.content -->
+</div>

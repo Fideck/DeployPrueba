@@ -1,0 +1,111 @@
+<div class="modal-header">
+  <h5 class="modal-title">Producto</h5>
+  <button type="button" class="btn-close" aria-label="Close" (click)="modalRef.close()"></button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="form" (ngSubmit)="submitProduct()">
+    <div class="row">
+      <input type="hidden" formArrayName="id">
+      <div class="col-lg-6">
+        <label>Nombre(*)</label>
+        <div class="input-group">
+          <input type="text" placeholder="Nombre" class="form-control mb-2" formControlName="name" />
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <label>Descripcion(*)</label>
+        <div class="input-group">
+          <input type="text" placeholder="Descripcion" class="form-control mb-2" formControlName="description" />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <label>Industria(*)</label>
+        <div class="input-group">
+          <input type="text" placeholder="Industria.." class="form-control mb-2 col-5" formControlName="industry" />
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <label>Marca(*)</label>
+        <div class="input-group">
+          <input type="text" placeholder="Marca" class="form-control mb-2 col-5" formControlName="marca" />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <label>Cantidad(*)</label>
+        <input type="number" class="form-control mb-2 col-5" formControlName="stock" />
+      </div>
+      <div class="col-lg-6">
+        <label>Precio Compra(*)</label>
+        <input type="number" class="form-control mb-2 col-5" formControlName="purchase_price" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <label>Garantia(*)</label>
+        <input type="number" class="form-control col-5 mb-2" formControlName="assurance_months" />
+      </div>
+      <div class="col-lg-6">
+        <label>Precio Venta(*)</label>
+        <input type="number" class="form-control col-5 mb-2" formControlName="selling_price" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <label>Sede(*)</label>
+        <select formControlName="branchOffice" class="form-control mb-2">
+          <option *ngFor="let sede of sedes;" [value]="sede.id">
+            {{sede.name}}
+          </option>
+        </select>
+      </div>
+      <div class="col-lg-6">
+        <label>Proveedor(*)</label>
+        <select formControlName="supplier" class="form-control mb-2">
+          <option *ngFor="let proveedor of proveedores;" [value]="proveedor.id">
+            {{proveedor.name}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <label>Imagen(*)</label>
+        <input type="file" (change)="loadImage($event)" class="form-control col-5 mb-2" />
+      </div>
+
+
+      <!--      <div class="col-lg-6">-->
+      <!--        <img width="150px" [src]="imagenBase64" alt="" />-->
+      <!--      </div>-->
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6">
+        <label for="">Barcode</label>
+        <div class="row">
+          <div class="col-lg-6">
+            <button type="button" (click)="JsBarcode()">Generar BarCode</button>
+          </div>
+          <div class="col-lg-6">
+            <canvas id="barcode">
+            </canvas>
+          </div>
+        </div>
+       
+      </div>
+    </div>
+
+    <br />
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary" [disabled]="this.form.invalid"
+        [class.invalidado]="this.form.invalid" [class.validado]="this.form.valid">
+        Guardar
+      </button>
+      <button type="button" class="btn btn-secondary" (click)="modalRef.close()">Cerrar</button>
+    </div>
+  </form>
+</div>

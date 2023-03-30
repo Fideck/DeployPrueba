@@ -1,0 +1,186 @@
+<app-header></app-header> <app-sidebar></app-sidebar><br />
+<div class="content-wrapper">
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <div class="crear">
+                <input
+                  type="button"
+                  class="btn btn-primary"
+                  value="Crear"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modelId"
+                />
+              </div>
+            </div>
+            <form [formGroup]="form">
+              <div class="card-body">
+                <table id="" class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th>Opciones</th>
+                      <th>Codigo</th>
+                      <th>Producto</th>
+                      <th>Descripcion</th>
+                      <th>Unidad Medida</th>
+                      <th>Precio</th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    formArrayName="detalleEgreso"
+                    *ngFor="let detalle of getForm().controls; let i = index"
+                  >
+                    <tr [formGroupName]="i">
+                      <td>
+                        <button
+                          class="btn btn-danger"
+                          (click)="eliminarDetalleProducto(i)"
+                        >
+                          <i class="fa fa-trash"> </i>
+                        </button>
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          formControlName="codigo"
+                          class="form-control"
+                          readonly
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          formControlName="producto"
+                          class="form-control"
+                          readonly
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          formControlName="descripcion"
+                          class="form-control"
+                          readonly
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          formControlName="unidadMedida"
+                          class="form-control"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="number"
+                          class="form-control"
+                          formControlName="precio"
+                        />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-sm-2">
+                <div class="d-grid gap-1">
+                  <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button> -->
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    [disabled]="this.form.invalid || getForm().length == 0"
+                  >
+                    Registrar
+                  </button>
+                  <a
+                    [routerLink]="['/home/dashboard/']"
+                    class="btn btn-secondary"
+                    >Cancelar</a
+                  >
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /.content -->
+</div>
+<div
+  class="modal fade"
+  id="modelId"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="modelTitleId"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title title">Seleccione los productos</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <mat-form-field appearance="standard"
+          ><input
+            matInput
+            (keyup)="applyFilter($event)"
+            placeholder="Buscar..."
+            #input
+            class="form-control"
+            [autocomplete]="false"
+          />
+        </mat-form-field>
+        <table
+          class="table table-striped"
+          mat-table
+          [dataSource]="dataSource"
+          matSort
+        >
+          <!-- Position Column -->
+          <ng-container matColumnDef="opciones">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Opciones</th>
+            <td mat-cell *matCellDef="let element">
+              <button
+                [id]="element.id"
+                class="btn btn-success"
+                (click)="agregarProducto(element)"
+              >
+                <i class="fa fa-check"> </i>
+              </button>
+            </td>
+          </ng-container>
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+            <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+          </ng-container>
+          <!-- Name Column -->
+          <ng-container matColumnDef="stock">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad</th>
+            <td mat-cell *matCellDef="let element">{{ element.stock }}</td>
+          </ng-container>
+          <!-- Name Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Codigo</th>
+            <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+        <mat-paginator
+          [pageSizeOptions]="[5, 10, 20]"
+          showFirstLastButtons
+        ></mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>

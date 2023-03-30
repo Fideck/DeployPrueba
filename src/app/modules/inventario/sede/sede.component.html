@@ -1,0 +1,124 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<br />
+<div class="content-wrapper">
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <div class="crear">
+                <button
+                  (click)="openDialog()"
+                  type="button"
+                  class="btn btn-primary"
+                >
+                  Crear
+                </button>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <mat-form-field appearance="standard">
+                <input
+                  matInput
+                  (keyup)="applyFilter($event)"
+                  placeholder="Buscar..."
+                  #input
+                  class="form-control"
+                  [autocomplete]="true"
+                />
+              </mat-form-field>
+              <table
+                mat-table
+                [dataSource]="dataSource"
+                class="table table-striped"
+                matSort
+              >
+                <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
+
+                <!-- Position Column -->
+                <ng-container matColumnDef="id">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>#</th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.id }}
+                  </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Nombre
+                  </th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.name }}
+                  </td>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="is_active">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Estado
+                  </th>
+                  <td mat-cell *matCellDef="let element">
+                    <span
+                      class="badge text-bg-success"
+                      *ngIf="element.is_active == true"
+                      >Activado</span
+                    >
+                    <span
+                      class="badge text-bg-danger"
+                      *ngIf="element.estado == false"
+                      >Desactivado</span
+                    >
+                  </td>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="opciones">
+                  <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                  <td mat-cell *matCellDef="let element">
+                    <button
+                      (click)="openDialogForEdit(element)"
+                      class="btn btn-warning"
+                    >
+                      <i class="fa fa-pen"> </i>
+                    </button>
+                    &nbsp;
+                    <button
+                      (click)="darBajaSede(element.id, 0)"
+                      class="btn btn-danger"
+                      *ngIf="element.estado == 1"
+                    >
+                      <i class="fa fa-trash"> </i>
+                    </button>
+                    <button
+                      (click)="darBajaSede(element.id, 1)"
+                      class="btn btn-success"
+                      *ngIf="element.estado == 0"
+                    >
+                      <i class="fa fa-check"> </i>
+                    </button>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr
+                  mat-row
+                  *matRowDef="let row; columns: displayedColumns"
+                ></tr>
+              </table>
+              <mat-paginator
+                [pageSizeOptions]="[5, 10, 20]"
+                showFirstLastButtons
+              >
+              </mat-paginator>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

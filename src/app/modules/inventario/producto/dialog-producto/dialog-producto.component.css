@@ -1,0 +1,8 @@
+.incorrect{
+    border-color: #ff7676;
+    border: 2px solid #ff7676;
+}
+.correct{
+    border: 2px solid #8fe8e0;
+    border-color: #8fe8e0;
+}

@@ -1,0 +1,42 @@
+<div class="modal-header">
+  <h5 class="modal-title">Sede</h5>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="modalRef.close()"
+  ></button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="form" (ngSubmit)="submitSede()">
+    <input type="hidden" formControlName="id" />
+    <div class="form-group">
+      <label>Nombre</label>
+      <input
+        type="text"
+        placeholder="Nombre"
+        class="form-control"
+        formControlName="name"
+      />
+    </div>
+    <br />
+    <div class="modal-footer">
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="this.form.invalid"
+        [class.invalidado]="this.form.invalid"
+        [class.validado]="this.form.valid"
+      >
+        Guardar
+      </button>
+      <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="modalRef.close()"
+      >
+        Cerrar
+      </button>
+    </div>
+  </form>
+</div>

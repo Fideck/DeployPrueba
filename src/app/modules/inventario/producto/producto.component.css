@@ -1,0 +1,40 @@
+.incorrect{
+    border-color: #ff7676;
+    border: 2px solid #ff7676;
+}
+.correct{
+    border: 2px solid #8fe8e0;
+    border-color: #8fe8e0;
+}
+.validado{
+   background-color: #8fe8e0;
+   border-color: solid #8fe8e0;
+   color: white;
+}
+.invalidado{
+    background-color: #ff7676;
+    border-color: solid #ff7676;
+    color:#ffff
+}
+.acciones{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 10px;
+}
+.btn-crear{
+    background-color: #3498c0;
+    border-color: #3498c0;
+    width:5rem ;
+    color: #ffff;
+}
+.btn-crear:hover{
+    background-color: #3498c0;
+    
+    border-color: #3498c0;
+    color: #ffff;
+}
+.file-name {
+    margin-left: 1rem; /* or whatever margin you require */
+}
+
